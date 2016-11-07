@@ -54,12 +54,12 @@ extension User: NodeConvertible {
 
 extension User: Preparation {
     static func prepare(_ database: Database) throws {
-        try database.create("users", closure: { users in
+        try database.create("users") { users in
             users.id()
             users.string("username")
             users.string("created_at")
             users.string("updated_at")
-        })
+        }
     }
     
     static func revert(_ database: Database) throws {

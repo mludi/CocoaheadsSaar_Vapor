@@ -31,9 +31,9 @@ extension Post: NodeConvertible {
     }
     
     init(content inContent: String?, userId inUserId: Node?) {
-        self.content = inContent
-        self.userId = inUserId
-        self.imagePath = ""
+        content = inContent
+        userId = inUserId
+        imagePath = ""
         createdAt = Date().current()
         updatedAt = Date().current()
     }
@@ -68,14 +68,14 @@ extension Post: NodeConvertible {
 
 extension Post: Preparation {
     static func prepare(_ database: Database) throws {
-        try database.create("posts", closure: { posts in
+        try database.create("posts") { posts in
             posts.id()
             posts.string("content")
             posts.string("created_at")
             posts.string("updated_at")
             posts.string("image_path")
             posts.parent(User.self, optional: false)
-        })
+        }
     }
     
     static func revert(_ database: Database) throws {
