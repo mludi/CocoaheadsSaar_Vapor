@@ -12,7 +12,4 @@ drop.group("api") { api in
         v1.resource("users", UserController())
     }
 }
-
-
-
 drop.run()

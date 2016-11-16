@@ -68,7 +68,7 @@ final class UserController: ResourceRepresentable {
 
 extension Request {
     func user() throws -> User {
-        guard let json = json  else { throw Abort.badRequest }
+        guard let json = json else { throw Abort.badRequest }
         return try User(node: json)
     }
 }
