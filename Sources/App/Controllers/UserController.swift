@@ -7,15 +7,6 @@ final class UserController: ResourceRepresentable {
     func index(request: Request) throws -> ResponseRepresentable {
         return JSON(try User.all().map {try $0.makeJSON() })
     }
-    
-    func paginated() {
-        guard let query = try? User.query() else { return }
-        query.limit = Limit(count: 5)
-        if let users = try? query.all() {
-            print(users.count)
-        }
-    }
-    
     func create(request: Request) throws -> ResponseRepresentable {
         if let username = request.data["username"]?.string, let _ = try User.query().filter("username", username).first() {
             throw Abort.custom(status: .badRequest, message: "A user with name \(username) already exists")
